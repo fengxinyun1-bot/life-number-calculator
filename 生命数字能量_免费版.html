@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命数字能量 - 探索你的生命密码【免费版】</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <style>
+        :root {
+            --primary: #B8C8D8;
+            --secondary: #D9CFC1;
+            --background: #F7F5F2;
+            --text-primary: #333333;
+            --text-secondary: #888888;
+            --accent: #A89BBF;
+            --white: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(247, 245, 242, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(184, 200, 216, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #9B8CB0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(168, 155, 191, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--text-primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: rgba(168, 155, 191, 0.05);
+        }
+
+        .btn-lg {
+            padding: 18px 48px;
+            font-size: 16px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(168, 155, 191, 0.1);
+            color: var(--accent);
+            border-radius: 30px;
+            font-size: 13px;
+            margin-bottom: 30px;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-title {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+
+        .hero-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 60px 0;
+        }
+
+        .hero-number {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border: 1px solid rgba(184, 200, 216, 0.5);
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-primary);
+        }
+
+        .features {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border: 1px solid rgba(184, 200, 216, 0.3);
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(168, 155, 191, 0.1);
+            border-radius: 16px;
+            font-size: 28px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .calculator-page {
+            min-height: 100vh;
+            padding: 120px 20px 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calculator-card {
+            background: var(--white);
+            border: 1px solid rgba(184, 200, 216, 0.3);
+            border-radius: 24px;
+            padding: 60px 48px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .calculator-title {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .calculator-subtitle {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(168, 155, 191, 0.1);
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 12px;
+        }
+
+        .result-page {
+            min-height: 100vh;
+            padding: 100px 20px 80px;
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .result-main-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(80px, 15vw, 120px);
+            font-weight: 300;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .result-label {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(217, 207, 193, 0.3);
+            color: var(--text-secondary);
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .result-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .result-subtitle {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .number-card {
+            background: var(--white);
+            border: 1px solid rgba(184, 200, 216, 0.5);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .number-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 24px rgba(168, 155, 191, 0.15);
+        }
+
+        .number-card.active {
+            border-color: var(--accent);
+            background: rgba(168, 155, 191, 0.05);
+        }
+
+        .number-card-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .number-card-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .content-section {
+            background: var(--white);
+            border: 1px solid rgba(184, 200, 216, 0.3);
+            border-radius: 20px;
+            padding: 48px;
+            margin-bottom: 32px;
+        }
+
+        .content-title {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .content-text {
+            font-size: 16px;
+            line-height: 2;
+            color: var(--text-primary);
+            text-align: justify;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: rgba(184, 200, 216, 0.3);
+            margin: 32px 0;
+        }
+
+        .challenge-section {
+            margin-top: 40px;
+        }
+
+        .challenge-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .challenge-card {
+            background: rgba(168, 155, 191, 0.05);
+            border: 1px solid rgba(168, 155, 191, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .challenge-card-title {
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .challenge-card-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .challenge-card-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .vip-page {
+            min-height: 100vh;
+            padding: 120px 20px 80px;
+        }
+
+        .vip-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .vip-packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .vip-package {
+            background: var(--white);
+            border: 1px solid rgba(184, 200, 216, 0.3);
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .vip-package:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .vip-package.popular {
+            border-color: var(--accent);
+        }
+
+        .vip-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--white);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .vip-name {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .vip-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .vip-duration {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .vip-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .vip-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(184, 200, 216, 0.2);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .vip-features li:last-child {
+            border-bottom: none;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 24px;
+            max-width: 440px;
+            width: 100%;
+            padding: 48px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: var(--background);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(168, 155, 191, 0.1);
+            border-radius: 50%;
+            font-size: 36px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .modal-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .footer {
+            background: var(--white);
+            border-top: 1px solid rgba(184, 200, 216, 0.3);
+            padding: 60px 0 40px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .free-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #67C23A, #85CE61);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-numbers {
+                gap: 16px;
+            }
+
+            .hero-number {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+
+            .calculator-card {
+                padding: 40px 24px;
+            }
+
+            .content-section {
+                padding: 32px 24px;
+            }
+
+            .numbers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .fade-in-delay-1 {
+            animation-delay: 0.1s;
+            opacity: 0;
+        }
+
+        .fade-in-delay-2 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+
+        .fade-in-delay-3 {
+            animation-delay: 0.3s;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <div class="container header-content">
+                <a href="#" class="logo" @click.prevent="goHome">
+                    LIFE NUMBERS <span class="free-badge">免费版</span>
+                </a>
+                <nav class="nav">
+                    <a href="#" class="nav-link" @click.prevent="goHome">首页</a>
+                    <a href="#" class="nav-link" @click.prevent="scrollToFeatures">功能特点</a>
+                </nav>
+            </div>
+        </header>
+
+        <main v-if="currentPage === 'home'">
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge fade-in">✨ 探索你的生命密码</div>
+                    <h1 class="hero-title fade-in fade-in-delay-1">
+                        生命数字能量<br>测算平台 <span class="free-badge">完全免费</span>
+                    </h1>
+                    <p class="hero-subtitle fade-in fade-in-delay-2">
+                        基于西方数字命理学，通过出生日期解读你的性格天赋、<br>
+                        事业方向、感情运势，找到属于你的生命数字密码
+                    </p>
+                    <button class="btn btn-primary btn-lg fade-in fade-in-delay-3" @click="goCalculator">
+                        开始免费测算 →
+                    </button>
+
+                    <div class="hero-numbers fade-in fade-in-delay-3">
+                        <div class="hero-number">1</div>
+                        <div class="hero-number">2</div>
+                        <div class="hero-number">3</div>
+                        <div class="hero-number">...</div>
+                        <div class="hero-number">9</div>
+                        <div class="hero-number">11</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features" id="features">
+                <div class="container">
+                    <h2 class="section-title">九大数字解读体系</h2>
+                    <p class="section-subtitle">从多个维度深度解析你的生命数字密码</p>
+
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3 class="feature-title">主性格数</h3>
+                            <p class="feature-desc">了解你一生的核心性格与天赋倾向，发现最真实的自己</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">✨</div>
+                            <h3 class="feature-title">灵魂灵数</h3>
+                            <p class="feature-desc">探索灵魂深处的渴望与追求，找到生命的真正意义</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">💭</div>
+                            <h3 class="feature-title">内心数字</h3>
+                            <p class="feature-desc">洞察内心真实的想法与感受，理解自己的内在世界</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">🎭</div>
+                            <h3 class="feature-title">外在数字</h3>
+                            <p class="feature-desc">了解你给外界展现的形象，优化人际交往</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <h3 class="feature-title">人生课题</h3>
+                            <p class="feature-desc">发现需要学习和成长的方向，助你更好地发展</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">📅</div>
+                            <h3 class="feature-title">流年运势</h3>
+                            <p class="feature-desc">把握当前年度运势走向，顺势而为，把握机遇</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">🔥</div>
+                            <h3 class="feature-title">28岁前挑战</h3>
+                            <p class="feature-desc">了解年轻时期的挑战与成长课题</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">🌟</div>
+                            <h3 class="feature-title">28岁后挑战</h3>
+                            <p class="feature-desc">了解成熟时期的挑战与人生转变</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3 class="feature-title">终身挑战</h3>
+                            <p class="feature-desc">贯穿一生的核心挑战与成长密码</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section v-if="currentPage === 'calculator'" class="calculator-page">
+            <div class="calculator-card fade-in">
+                <h2 class="calculator-title">输入你的出生日期</h2>
+                <p class="calculator-subtitle">我们将为你免费解读生命数字密码</p>
+
+                <div class="form-group">
+                    <label class="form-label">出生年份</label>
+                    <input type="number" class="form-input" v-model="birthYear" placeholder="例如：1990" min="1900" :max="currentYear">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">出生月份</label>
+                    <input type="number" class="form-input" v-model="birthMonth" placeholder="1-12" min="1" max="12">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">出生日期</label>
+                    <input type="number" class="form-input" v-model="birthDay" placeholder="1-31" min="1" max="31">
+                </div>
+
+                <button class="btn btn-primary btn-lg" style="width: 100%;" @click="calculate" :disabled="!canCalculate">
+                    开始免费测算
+                </button>
+
+                <p class="form-hint" style="margin-top: 24px;">
+                    ✨ 功能全免费，无需注册，无需付费
+                </p>
+            </div>
+        </section>
+
+        <section v-if="currentPage === 'result'" class="result-page">
+            <div class="container">
+                <div class="result-header fade-in">
+                    <div class="result-main-number">{{ result.mainNum }}</div>
+                    <span class="result-label">主性格数</span>
+                    <h2 class="result-title">{{ getNumberTitle(result.mainNum) }}</h2>
+                    <p class="result-subtitle">{{ getNumberSubtitle(result.mainNum) }}</p>
+                </div>
+
+                <div class="numbers-grid">
+                    <div class="number-card" :class="{ active: activeTab === 'mainNum' }" @click="activeTab = 'mainNum'">
+                        <div class="number-card-value">{{ result.mainNum }}</div>
+                        <div class="number-card-label">主性格数</div>
+                    </div>
+
+                    <div class="number-card" :class="{ active: activeTab === 'soulNum' }" @click="activeTab = 'soulNum'">
+                        <div class="number-card-value">{{ result.soulNum }}</div>
+                        <div class="number-card-label">灵魂灵数</div>
+                    </div>
+
+                    <div class="number-card" :class="{ active: activeTab === 'innerNum' }" @click="activeTab = 'innerNum'">
+                        <div class="number-card-value">{{ result.innerNum }}</div>
+                        <div class="number-card-label">内心数字</div>
+                    </div>
+
+                    <div class="number-card" :class="{ active: activeTab === 'outerNum' }" @click="activeTab = 'outerNum'">
+                        <div class="number-card-value">{{ result.outerNum }}</div>
+                        <div class="number-card-label">外在数字</div>
+                    </div>
+
+                    <div class="number-card" :class="{ active: activeTab === 'lessonNum' }" @click="activeTab = 'lessonNum'">
+                        <div class="number-card-value">{{ result.lessonNum }}</div>
+                        <div class="number-card-label">人生课题</div>
+                    </div>
+
+                    <div class="number-card" :class="{ active: activeTab === 'yearNum' }" @click="activeTab = 'yearNum'">
+                        <div class="number-card-value">{{ result.yearNum }}</div>
+                        <div class="number-card-label">流年运势</div>
+                    </div>
+                </div>
+
+                <div class="content-section fade-in">
+                    <h3 class="content-title">{{ getTabTitle(activeTab) }}</h3>
+                    <p class="content-text">{{ getFullContent(activeTab, result[activeTab]) }}</p>
+                </div>
+
+                <div class="content-section fade-in">
+                    <h3 class="content-title">流年运势解读</h3>
+                    <p class="content-text" style="margin-bottom: 16px;">{{ yearResult.title }}</p>
+                    <p class="content-text">{{ yearResult.summary }}</p>
+                    <div class="section-divider"></div>
+                    <p class="content-text">{{ yearResult.full }}</p>
+                </div>
+
+                <div class="challenge-section fade-in">
+                    <h3 class="challenge-title">🔥 四大挑战数解读</h3>
+                    <div class="challenge-grid">
+                        <div class="challenge-card">
+                            <div class="challenge-card-title">28岁前挑战</div>
+                            <div class="challenge-card-value">{{ challengeResult.c1 }}</div>
+                            <div class="challenge-card-desc">{{ challengeResult.c1Text }}</div>
+                        </div>
+
+                        <div class="challenge-card">
+                            <div class="challenge-card-title">28岁后挑战</div>
+                            <div class="challenge-card-value">{{ challengeResult.c2 }}</div>
+                            <div class="challenge-card-desc">{{ challengeResult.c2Text }}</div>
+                        </div>
+
+                        <div class="challenge-card">
+                            <div class="challenge-card-title">终身挑战①</div>
+                            <div class="challenge-card-value">{{ challengeResult.c3 }}</div>
+                            <div class="challenge-card-desc">{{ challengeResult.c3Text }}</div>
+                        </div>
+
+                        <div class="challenge-card">
+                            <div class="challenge-card-title">终身挑战②</div>
+                            <div class="challenge-card-value">{{ challengeResult.c4 }}</div>
+                            <div class="challenge-card-desc">{{ challengeResult.c4Text }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 48px;">
+                    <button class="btn btn-primary" @click="goCalculator">
+                        🔄 重新测算
+                    </button>
+                    <button class="btn btn-secondary" style="margin-left: 16px;" @click="goHome">
+                        返回首页
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="footer-logo">LIFE NUMBERS <span class="free-badge">免费版</span></div>
+                <p class="footer-text">生命数字能量测算平台 - 完全免费</p>
+                <p class="footer-text">探索生命密码，遇见更好的自己</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue;
+
+        const lifeNumData = {
+            1: {
+                main: "你天生自带开创与领袖能量，独立有主见，做事果断有魄力，不喜欢随波逐流，有自己的想法和追求，自带气场与领导力。",
+                soul: "内心骨子里很倔强，不愿依附他人，习惯自己扛事，看似坚强，其实内心渴望被认可、被理解。",
+                inner: "在外人眼里你干练利落、有主见、不好拿捏，做事有原则，给人可靠、强势、有能力的第一印象。",
+                outer: "天生拥有创造、开拓、决策的天赋，适合带头做事、独立创业、主导项目，容易成为圈子里的核心人物。",
+                lesson: "今生课题是学会示弱与包容，不要太过固执独断，多倾听他人建议，懂得刚柔并济，人缘和运势会更顺遂。"
+            },
+            2: {
+                main: "你自带温柔共情能量，性格细腻温和，善于换位思考，懂得包容迁就，天生擅长协调人际关系，人缘很好。",
+                soul: "内心敏感细腻，容易想太多，缺乏安全感，很在意别人的看法，习惯迁就别人，常常委屈自己成全他人。",
+                inner: "外人眼里你温柔随和、脾气好、好相处，文静有礼貌，给人舒服、治愈、没有距离感的气质。",
+                outer: "拥有沟通、协调、洞察人心的天赋，适合人际对接、陪伴疗愈、文案共情、服务型相关赛道。",
+                lesson: "今生课题是建立自我主见，不要过度讨好他人，学会拒绝，多遵从自己内心，不用事事迁就别人。"
+            },
+            3: {
+                main: "你自带创意与表达能量，性格活泼开朗，乐观爱笑，脑洞丰富，有艺术感知力，善于表达、自带感染力。",
+                soul: "内心向往浪漫与新鲜感，讨厌沉闷无趣，情绪来得快去得也快，内心渴望被关注、被欣赏。",
+                inner: "在外人眼里你有趣开朗、口才好、爱分享，活泼阳光，走到哪里都能带动气氛，是人群里的开心果。",
+                outer: "天生拥有创意、艺术、口才、创作天赋，适合设计、自媒体、文案、表演、审美相关方向发展。",
+                lesson: "今生课题是培养专注力，避免三分钟热度，学会沉淀耐心，把兴趣变成长期坚持的能力。"
+            },
+            4: {
+                main: "你自带稳重踏实能量，做事严谨有条理，守规则、重承诺，性格沉稳靠谱，让人信任和托付。",
+                soul: "内心极度缺乏安全感，喜欢稳定、不喜欢变动，凡事追求稳妥，容易多虑、内心紧绷不放松。",
+                inner: "外人眼里你稳重内敛、踏实靠谱、做事认真有原则，不浮夸不张扬，是身边人可以依靠的对象。",
+                outer: "拥有规划、统筹、细节执行、踏实深耕的天赋，适合稳定岗位、技术、财务、行政、长期深耕型行业。",
+                lesson: "今生课题是学会接纳变化，不必太过保守紧绷，偶尔放松自己，懂得变通，不要钻牛角尖。"
+            },
+            5: {
+                main: "你自带自由灵动能量，性格灵活多变，好奇心强，适应能力极强，不喜被束缚，喜欢新鲜事物和探索。",
+                soul: "内心向往无拘无束，讨厌被管束、被捆绑，渴望精神和生活都有自由空间，不喜欢一成不变。",
+                inner: "在外人眼里你外向灵活、人脉广、懂变通，适应力超强，性格洒脱不拘小节，很好相处。",
+                outer: "拥有学习、社交、变通、探索的天赋，适合自由职业、商贸、旅行、自媒体、灵活弹性类工作。",
+                lesson: "今生课题是沉淀定力，避免浮躁半途而废，选定方向坚持到底，学会自律，不要太过随性散漫。"
+            },
+            6: {
+                main: "你自带善良治愈能量，心软温柔、重情重义，有责任心、顾家有爱，天生愿意付出、照顾身边人。",
+                soul: "内心很重感情和家庭，容易操心劳碌，习惯为别人付出、替别人着想，常常委屈自己成全他人。",
+                inner: "外人眼里你温柔善良、有亲和力、气质治愈，待人真诚体贴，很有家庭感和温柔气场。",
+                outer: "拥有疗愈、审美、照顾、教育、助人的天赋，适合美学、医护、教育、心理、居家生活类赛道。",
+                lesson: "今生课题是先爱自己再爱别人，不要过度付出消耗，学会设立边界，善良要有底线和锋芒。"
+            },
+            7: {
+                main: "你自带智慧灵性能量，喜欢思考内省，悟性高、洞察力强，偏爱深度钻研，性格偏安静内敛、有神秘感。",
+                soul: "内心喜欢独处思考，心思细腻敏感，不容易完全信任别人，习惯把心事藏在心里，有点慢热孤僻。",
+                inner: "外人眼里你冷静理性、沉稳有想法、不爱凑热闹，自带高冷神秘感，看人看事很通透。",
+                outer: "拥有思考、洞察、钻研、灵性感悟的天赋，适合脑力研究、咨询、命理、深度内容、专业深耕领域。",
+                lesson: "今生课题是学会敞开心扉，不要过度封闭自己，试着信任他人，多融入社交，不必凡事独自硬扛。"
+            },
+            8: {
+                main: "你自带格局财富能量，胸怀大气、有野心有担当，商业悟性高，抗压能力强，擅长掌控资源和大局。",
+                soul: "内心不甘平庸，渴望成就和价值，事业心很重，习惯靠自己打拼，不愿低头认输，好强且有底线。",
+                inner: "外人眼里你气场强大、格局开阔、做事果断、有事业心，稳重大气，自带强者风范。",
+                outer: "拥有经商、管理、资源整合、财富运营的天赋，适合创业、投资、企业管理、项目运营类发展。",
+                lesson: "今生课题是平衡事业与生活，待人多一份温和包容，不要太过强势功利，懂得刚柔兼顾。"
+            },
+            9: {
+                main: "你自带大爱包容能量，心胸宽广、善良慈悲，格局高远、包容性强，有情怀有同理心，贵人缘分很旺。",
+                soul: "内心理想主义、心软善良，容易轻信他人，总是为别人着想，容易感动也容易受伤。",
+                inner: "在外人眼里你大气随和、待人宽厚、不计较小事，有包容心，气质温润稳重，人缘贵人都很好。",
+                outer: "拥有博爱、文化、引领、助人、格局大局的天赋，适合文化教育、公益、心灵成长、艺术传播领域。",
+                lesson: "今生课题是回归现实、保留底线，不要太过理想化，善良要有判断力，别轻易心软吃亏。"
+            },
+            11: {
+                main: "你是天生的灵性大师数11，拥有双倍2号的细腻感知与先天直觉，自带灵气与通透感，天生具备灵感、共情、引领他人的能量，心思通透、悟性远超常人。",
+                soul: "内心敏感通透、灵性极强，容易感应他人情绪，想法超前又理想主义，常常内心比同龄人成熟，习惯独处向内思考，不喜欢流于表面的社交。",
+                inner: "外人眼里你温柔安静、气质独特、自带神秘感，待人谦和低调，却藏着过人的眼光与洞察力，给人温柔又有深度的印象。",
+                outer: "灵魂自带灵性天赋、直觉天赋、疗愈天赋、启发他人的天赋，适合心灵成长、咨询、美学、文案、命理、助人成长类方向。",
+                lesson: "今生课题是学会落地务实，不要过度沉浸空想与敏感内耗，把灵性灵感转化为现实行动，平衡感性与理性，发挥天赋照亮自己也温暖他人。"
+            },
+            22: {
+                main: "你是格局极强的落地大师数22，拥有双倍4号的稳重承载力，天生具备把理想变成现实的强大能量，格局宏大、踏实靠谱、有成就大事的先天潜质。",
+                soul: "内心沉稳有担当，目标远大、不甘平庸，心思缜密且有长远规划，私下隐忍抗压，习惯默默扛下压力，不轻易向人示弱求助。",
+                inner: "在外人眼中你稳重大气、行事靠谱、格局开阔，做事有条理、有远见，自带领导者气场，让人愿意信任、跟随与托付。",
+                outer: "灵魂自带规划、搭建、落地、统筹、成就事业的天赋，适合做大项目、创业布局、团队管理、长期深耕实业与平台搭建。",
+                lesson: "今生课题是放下完美主义与过度紧绷，学会适当放权、接纳不完美，不必凡事独自硬扛，懂得借力合作，人生格局会走得更大更远。"
+            },
+            33: {
+                main: "你是至高慈悲大师数33，拥有双倍6号的大爱与治愈能量，天生心怀温柔慈悲、利他助人，自带治愈气场，一生容易和帮扶、疗愈、渡人结缘。",
+                soul: "内心柔软善良、共情力极强，容易心疼他人、习惯性付出牺牲，把人情与情义看得极重，容易委屈自己成全别人，内心渴望温暖与被珍惜。",
+                inner: "外人眼里你气质温润善良、待人包容大度、亲和力极强，温柔又有担当，自带治愈感，是身边人愿意依赖、倾诉与亲近的对象。",
+                outer: "灵魂自带疗愈、关怀、教育、爱心、渡人利他的天赋，适合医护、教育、心理疗愈、公益、心灵成长、情感陪伴类赛道。",
+                lesson: "今生课题是学会自爱设立边界，不要无底线付出消耗自己，慈悲要有锋芒，先安顿好自己的人生，再温柔善待世间旁人。"
+            }
+        };
+
+        const yearNumData = {
+            1: {
+                title: "流年1 · 全新开局之年",
+                summary: "本年度是重启新生、从头出发的关键一年，适合做规划、立新目标、开启新赛道。",
+                full: "流年1是全新轮回的起点，气场焕然一新，非常适合下定决心、换方向、开启事业新计划、开展新人际圈子。这一年主动权在自己手里，适合大胆尝试、主动争取机会，不要安于现状。心态要果断独立，少纠结内耗，敢做决定就能收获新机遇。"
+            },
+            2: {
+                title: "流年2 · 磨合沉淀之年",
+                summary: "本年度适合低调沉淀、人际磨合、耐心等待时机，不宜冲动做重大决策。",
+                full: "流年2主打温和、陪伴与协调，适合维系人脉、经营感情、默默积累实力。这一年凡事讲究慢慢来，急于求成反而容易波折，适合配合他人、合作共赢、打磨细节。情绪容易敏感多想，学会放宽心态、包容待人，贵人会悄悄靠近你。"
+            },
+            3: {
+                title: "流年3 · 创意绽放之年",
+                summary: "本年度灵感爆棚、人缘变好、适合表达展示、社交拓展、发展兴趣爱好。",
+                full: "流年3充满活力与创意，适合大胆表达自我、展现才华、做自媒体、创作设计、拓展社交圈子。人缘运势明显上升，容易结识有趣同频的人，感情也更容易有桃花机缘。切记避免三分钟热度，选定喜欢的方向坚持深耕，收获会远超预期。"
+            },
+            4: {
+                title: "流年4 · 稳扎稳打之年",
+                summary: "本年度适合踏实耕耘、夯实基础、规划理财、稳住生活与事业节奏。",
+                full: "流年4是沉淀扎根的一年，不适合冒进冒险，适合稳工作、攒积蓄、做长期规划、整理生活秩序。凡事讲究脚踏实地，一步一个脚印最稳妥，适合学习技能、考证进修、加固事业根基。心态容易紧绷焦虑，记得适当放松，不必事事苛求完美。"
+            },
+            5: {
+                title: "流年5 · 变动自由之年",
+                summary: "本年度容易有生活变动、出行增多、适合突破舒适圈、尝试新选择。",
+                full: "流年5主打变化与自由，容易出现换环境、换工作、远行出差、认识新朋友等变动。这一年越敢跳出舒适圈，运气越好，适合尝试新行业、新生活方式、拓展异地人脉。切记保持自律，不要太过随性散漫，守住底线才能把握好运。"
+            },
+            6: {
+                title: "流年6 · 温情守护之年",
+                summary: "本年度重心偏向家庭感情、人际和睦、人缘贵人旺，适合付出与维系关系。",
+                full: "流年6是重情重义的一年，家庭、感情、亲友缘分变重，适合用心经营亲密关系、照顾家人、帮助身边人。贵人运明显提升，待人真诚付出，容易被人记挂与扶持。同时容易操心劳碌，记得多心疼自己，不要一味迁就委屈自己。"
+            },
+            7: {
+                title: "流年7 · 内观修行之年",
+                summary: "本年度适合静心思考、学习深造、自我沉淀，适合独处提升内在修为。",
+                full: "流年7主打静心、思考与自省，不适合强行向外争抢，适合默默学习、进修提升、深度思考人生方向。适合沉淀内心、梳理思绪、远离无效社交，给自己多一点独处时间。直觉和悟性会变强，跟着内心直觉做选择，往往更准更顺遂。"
+            },
+            8: {
+                title: "流年8 · 财富收获之年",
+                summary: "本年度财运事业运上扬，适合打拼进取、把握商机、规划财富布局。",
+                full: "流年8是财富与格局提升的关键年，事业、财运机遇增多，适合主动争取资源、拓展事业版图、合理投资理财。抗压能力会变强，有机会突破层级、提升收入与地位。切记做事保持温和分寸，不要过于强势功利，平衡事业与生活更长久。"
+            },
+            9: {
+                title: "流年9 · 收官收尾之年",
+                summary: "本年度是轮回收尾阶段，适合放下过往、清理遗憾、告别旧的人和事。",
+                full: "流年9是一个周期的终点，适合总结过往、放下执念、告别不合适的关系、结束消耗自己的事。适合断舍离、清理心态、放下遗憾，为下一年新生做铺垫。心态容易感慨怀旧，学会释怀看淡得失，放过自己，才能迎接下一段好运轮回。"
+            }
+        };
+
+        const challengeNumData = {
+            1: {
+                age1: "你年轻时需要学会独立自主，不过度依赖他人。面对挑战时容易退缩或犹豫，需要培养果断和勇气。",
+                age2: "28岁后你需要学会接纳变化，不固守旧有的模式和观念。",
+                life3: "你一生中最主要的挑战是学会独立自主，建立自信，不过度依赖他人的认可。",
+                life4: "你需要克服内心的恐惧和不安，勇敢迈出第一步，相信自己的能力。"
+            },
+            2: {
+                age1: "你年轻时在人际交往中容易显得过于敏感和害羞，需要学会表达自己的想法和感受。",
+                age2: "28岁后你需要学会接纳他人的不同，不强求别人与你保持一致。",
+                life3: "你一生中最主要的挑战是学会平衡自我与他人的关系，既保持独立又懂得合作。",
+                life4: "你需要克服过度敏感的问题，培养心理韧性，学会在人际交往中保持平和。"
+            },
+            3: {
+                age1: "你年轻时容易三心二意，缺乏专注力，需要学会在一件事上深耕。",
+                age2: "28岁后你需要学会沉稳和踏实，避免过于追求表面的光鲜。",
+                life3: "你一生中最主要的挑战是学会专注和坚持，把才华转化为实际成果。",
+                life4: "你需要克服浮躁和浅尝辄止的毛病，培养耐心和毅力。"
+            },
+            4: {
+                age1: "你年轻时容易过于保守和固执，需要学会灵活变通，接纳新事物。",
+                age2: "28岁后你需要学会放松和放手，不必事事追求完美和控制。",
+                life3: "你一生中最主要的挑战是学会在稳定与变化之间找到平衡，既保持脚踏实地又灵活应变。",
+                life4: "你需要克服过度担忧和焦虑，学会信任过程，接纳不确定性。"
+            },
+            5: {
+                age1: "你年轻时容易过于散漫和缺乏自律，需要学会自制和专注。",
+                age2: "28岁后你需要学会承诺和责任，不能总是追求新鲜感而逃避固定承诺。",
+                life3: "你一生中最主要的挑战是学会在自由与责任之间找到平衡，既保持灵活性又承担应尽义务。",
+                life4: "你需要克服冲动和逃避责任的倾向，培养自律和坚持。"
+            },
+            6: {
+                age1: "你年轻时容易过度承担责任或过度牺牲自己，需要学会设立边界。",
+                age2: "28岁后你需要学会接纳家庭和亲密关系中的不完美。",
+                life3: "你一生中最主要的挑战是学会在付出与自我保护之间找到平衡，既保持爱心又设立边界。",
+                life4: "你需要克服过度操心和完美主义的倾向，学会接纳自己和他人的不完美。"
+            },
+            7: {
+                age1: "你年轻时容易过度内向或封闭自己，需要学会打开心扉与人交流。",
+                age2: "28岁后你需要学会在独处与社交之间找到平衡，既保持深度思考又融入人群。",
+                life3: "你一生中最主要的挑战是学会平衡内心世界与外在世界的需求，既保持灵性又接地气。",
+                life4: "你需要克服过度分析而行动力不足的问题，学会将洞察转化为行动。"
+            },
+            8: {
+                age1: "你年轻时容易过于急功近利或好高骛远，需要学会脚踏实地。",
+                age2: "28岁后你需要学会在追求成功与保持平和之间找到平衡。",
+                life3: "你一生中最主要的挑战是学会平衡野心与能力的关系，既保持进取又脚踏实地。",
+                life4: "你需要克服对失败的恐惧和金钱权力的执念，培养真正的内在价值感。"
+            },
+            9: {
+                age1: "你年轻时容易过于理想化或缺乏实际行动，需要学会落地执行。",
+                age2: "28岁后你需要学会放下和告别，接纳生命的无常和变迁。",
+                life3: "你一生中最主要的挑战是学会将博爱理想转化为实际行动，既保持宽广胸怀又落地务实。",
+                life4: "你需要克服过度牺牲和模糊边界的倾向，学会保护自己的能量。"
+            }
+        };
+
+        const numberTitles = {
+            1: { title: "开创者", subtitle: "天生的领导者，独立自主的先驱者" },
+            2: { title: "协调者", subtitle: "温柔的共情者，天生的沟通者" },
+            3: { title: "创意者", subtitle: "充满灵感的表达者，快乐的传播者" },
+            4: { title: "实践者", subtitle: "脚踏实地的建设者，稳固的依靠" },
+            5: { title: "自由者", subtitle: "追求自由的探索者，灵活的变通者" },
+            6: { title: "守护者", subtitle: "充满爱心的照顾者，温暖的治愈者" },
+            7: { title: "思想者", subtitle: "深邃的洞察者，智慧的探索者" },
+            8: { title: "成就者", subtitle: "格局宏大的领袖，财富的创造者" },
+            9: { title: "博爱者", subtitle: "胸怀大爱的引领者，贵人缘深厚" },
+            11: { title: "灵性大师", subtitle: "直觉敏锐的灵性导师，灵魂的启发者" },
+            22: { title: "建筑大师", subtitle: "格局宏大的实践者，梦想的建筑师" },
+            33: { title: "慈悲大师", subtitle: "至高爱的化身，疗愈众生的天使" }
+        };
+
+        function reduceNum(num) {
+            let str = num.toString();
+            let sum = 0;
+            for(let i=0; i<str.length; i++){
+                sum += Number(str[i]);
+            }
+            if(sum === 11 || sum === 22 || sum === 33){
+                return sum;
+            }
+            while(sum > 9){
+                let s = sum.toString();
+                let t = 0;
+                for(let i=0; i<s.length; i++){
+                    t += Number(s[i]);
+                }
+                sum = t;
+            }
+            return sum;
+        }
+
+        function getSingleSum(num) {
+            let str = num.toString();
+            let sum = 0;
+            for(let s of str) {
+                sum += Number(s);
+            }
+            while(sum > 9) {
+                let t = 0;
+                for(let s of sum.toString()) {
+                    t += Number(s);
+                }
+                sum = t;
+            }
+            return sum;
+        }
+
+        function calcLifeNum(birth){
+            let {year, month, day} = birth;
+            let allSum = reduceNum(year) + reduceNum(month) + reduceNum(day);
+            let mainNum = reduceNum(allSum);
+            let innerNum = reduceNum(month);
+            let outerNum = reduceNum(year);
+            let soulNum = reduceNum(day);
+            let lessonNum = mainNum === 9 ? 9 : 9 - mainNum;
+
+            return {
+                mainNum, innerNum, outerNum, soulNum, lessonNum
+            }
+        }
+
+        function calcYearNum(month, day, nowYear){
+            let sum = reduceNum(nowYear) + reduceNum(month) + reduceNum(day);
+            return reduceNum(sum);
+        }
+
+        function calcFourChallenge(year, month, day) {
+            let M = getSingleSum(month);
+            let D = getSingleSum(day);
+            let Y = getSingleSum(year);
+
+            let c1 = Math.abs(M - D);
+            let c2 = Math.abs(Y - D);
+            let c3 = Math.abs(c1 - c2);
+            let c4 = Math.abs(Y - M);
+
+            return {c1, c2, c3, c4};
+        }
+
+        const app = createApp({
+            setup() {
+                const currentPage = ref('home');
+                const birthYear = ref('');
+                const birthMonth = ref('');
+                const birthDay = ref('');
+                const currentYear = new Date().getFullYear();
+                const result = ref(null);
+                const yearResult = ref(null);
+                const challengeResult = ref(null);
+                const activeTab = ref('mainNum');
+
+                const canCalculate = computed(() => {
+                    return birthYear.value && birthMonth.value && birthDay.value &&
+                           birthYear.value >= 1900 && birthYear.value <= currentYear &&
+                           birthMonth.value >= 1 && birthMonth.value <= 12 &&
+                           birthDay.value >= 1 && birthDay.value <= 31;
+                });
+
+                const goHome = () => {
+                    currentPage.value = 'home';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+
+                const scrollToFeatures = () => {
+                    document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+                };
+
+                const goCalculator = () => {
+                    currentPage.value = 'calculator';
+                    birthYear.value = '';
+                    birthMonth.value = '';
+                    birthDay.value = '';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+
+                const calculate = () => {
+                    if (!canCalculate.value) return;
+
+                    const y = parseInt(birthYear.value);
+                    const m = parseInt(birthMonth.value);
+                    const d = parseInt(birthDay.value);
+
+                    result.value = calcLifeNum({year: y, month: m, day: d});
+                    result.value.yearNum = calcYearNum(m, d, currentYear);
+                    yearResult.value = yearNumData[result.value.yearNum] || {};
+
+                    const challenge = calcFourChallenge(y, m, d);
+                    challengeResult.value = {
+                        c1: challenge.c1,
+                        c2: challenge.c2,
+                        c3: challenge.c3,
+                        c4: challenge.c4,
+                        c1Text: challengeNumData[challenge.c1]?.age1 || '',
+                        c2Text: challengeNumData[challenge.c2]?.age2 || '',
+                        c3Text: challengeNumData[challenge.c3]?.life3 || '',
+                        c4Text: challengeNumData[challenge.c4]?.life4 || ''
+                    };
+
+                    activeTab.value = 'mainNum';
+                    currentPage.value = 'result';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+
+                const getNumberTitle = (num) => {
+                    return numberTitles[num]?.title || '';
+                };
+
+                const getNumberSubtitle = (num) => {
+                    return numberTitles[num]?.subtitle || '';
+                };
+
+                const getTabTitle = (tab) => {
+                    const titles = {
+                        mainNum: '主性格数解读',
+                        soulNum: '灵魂灵数解读',
+                        innerNum: '内心数字解读',
+                        outerNum: '外在数字解读',
+                        lessonNum: '人生课题解读',
+                        yearNum: '流年运势解读'
+                    };
+                    return titles[tab] || '';
+                };
+
+                const getFullContent = (tab, num) => {
+                    if (tab === 'yearNum') {
+                        return yearNumData[num]?.full || '';
+                    }
+                    const mapKey = {
+                        mainNum: 'main',
+                        soulNum: 'soul',
+                        innerNum: 'inner',
+                        outerNum: 'outer',
+                        lessonNum: 'lesson'
+                    };
+                    return lifeNumData[num]?.[mapKey[tab]] || '';
+                };
+
+                return {
+                    currentPage,
+                    birthYear,
+                    birthMonth,
+                    birthDay,
+                    currentYear,
+                    result,
+                    yearResult,
+                    challengeResult,
+                    activeTab,
+                    canCalculate,
+                    goHome,
+                    scrollToFeatures,
+                    goCalculator,
+                    calculate,
+                    getNumberTitle,
+                    getNumberSubtitle,
+                    getTabTitle,
+                    getFullContent
+                };
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
